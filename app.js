@@ -37,12 +37,6 @@
       live: PAGES + 'gunnison-land-attributes-demo/', repo: 'gunnison-land-attributes-demo', glyph: '8,000+ parcels, one map'
     },
     {
-      id: 'letters', title: 'AI Letter Assistant', status: 'code', cats: ['ai', 'auto'],
-      blurb: 'A GPT-powered app that drafts appeal responses, exemption notices, valuation explanations, and inquiry replies in a chosen tone, turning a recurring office writing task into a fill-in-the-form workflow.',
-      stack: ['Python', 'OpenAI API', 'Streamlit', 'Prompt engineering'],
-      repo: 'gunnison_ai_demos', glyph: 'Drafts in seconds'
-    },
-    {
       id: 'audit', title: 'Assessor Website Audit', status: 'live', cats: ['ai', 'analysis'],
       blurb: 'Ran the same research prompt and scoring rubric through ChatGPT, Gemini, and Claude, compared 24 Colorado counties, and merged the three reviews into one ranked action plan. One model caught a new state deadline change the other two missed.',
       stack: ['Prompt engineering', 'OpenAI API', 'Claude API', 'Gemini'],
@@ -101,12 +95,6 @@
       blurb: 'State-level demographic analysis of 2019 American Community Survey data, written entirely in SQL.',
       stack: ['SQL'],
       repo: 'us-state-demographics-sql-acs2019', glyph: 'ACS 2019 × SQL'
-    },
-    {
-      id: 'cyclistic', title: 'Cyclistic Bike-Share Case Study', status: 'code', cats: ['analysis'],
-      blurb: 'Exploratory analysis of rider behavior and trip trends, done for the Google Data Analytics capstone.',
-      stack: ['R'],
-      repo: 'cyclistic-bike-share-case-study', glyph: 'Riders vs. members'
     }
   ];
 
