@@ -7,16 +7,10 @@
   // status: live | code | dev. img: screenshot in /img, otherwise a generated contour map.
   const PROJECTS = [
     {
-      id: 'assessor-map', title: 'Assessor Map Platform', featured: true, status: 'live', cats: ['gis', 'apps'],
+      id: 'assessor-map', title: 'Assessor Map Platform', featured: true, status: 'live', cats: ['gis', 'apps', 'auto'],
       blurb: 'A full-stack GIS platform where non-technical staff upload data, configure interactive maps, and join Excel or CSV records to parcels without GIS software. Wildfire detections refresh every 30 minutes, and it runs on Docker and nginx with firewalling and automated backups.',
       stack: ['React', 'TypeScript', 'Node.js', 'MapLibre', 'PostGIS', 'GDAL', 'OGC APIs', 'Docker', 'nginx'],
       live: 'http://165.232.147.15', repo: 'assessor-map', glyph: 'Parcels + live wildfire layers'
-    },
-    {
-      id: 'land', title: 'Land Attributes Dashboard', featured: true, status: 'live', cats: ['gis', 'dash'],
-      blurb: 'A parcel map and review tool for land attributes across 8,000+ Gunnison County parcels. When a new export is uploaded, a GitHub Actions pipeline rebuilds and redeploys the data. A separate edition for internal county use reads directly from the RealWare API.',
-      stack: ['MapLibre', 'JavaScript', 'Python', 'GitHub Actions'],
-      live: PAGES + 'gunnison-land-attributes-demo/', repo: 'gunnison-land-attributes-demo', glyph: '8,000+ parcels, one map'
     },
     {
       id: 'building', title: 'The Shape of Gunnison’s Building Stock', status: 'live', cats: ['dash', 'analysis'], img: 'building.jpg',
@@ -25,10 +19,34 @@
       live: PAGES + 'gunnison-building-stock/', repo: 'gunnison-building-stock'
     },
     {
-      id: 'photo', title: 'Appraiser Photo Processor', status: 'code', cats: ['ai', 'apps'],
-      blurb: 'A desktop app that classifies, renames, and date-stamps field appraisal photos using GPS and compass metadata plus vision AI. It costs about $0.002 per photo and is in use by office staff.',
-      stack: ['Python', 'Claude API', 'PyInstaller'],
-      repo: 'Appraiser-Photo-Processor', glyph: 'Field photos, auto-sorted'
+      id: 'photo', title: 'Appraiser Photo Processor', featured: true, status: 'code', cats: ['ai', 'auto', 'apps'],
+      blurb: 'Multimodal AI used in daily work. The app reads each field photo’s GPS and compass data, matches it to the nearest parcel, classifies the shot with Claude Vision, and renames it to the office’s standard. It replaced a manual sorting step for appraisers at about $0.002 per photo and runs on staff Windows machines.',
+      stack: ['Python', 'Claude API', 'Vision AI', 'Prompt engineering', 'PyInstaller'],
+      repo: 'Appraiser-Photo-Processor', glyph: 'GPS + vision AI → filed photos'
+    },
+    {
+      id: 'llm', title: 'Private RAG Chatbot', status: 'code', cats: ['ai'],
+      blurb: 'A retrieval-augmented chatbot that answers questions from internal policy documents, plus an on-device coding assistant. Both run entirely on local open-source models, so sensitive data never leaves the machine.',
+      stack: ['Python', 'RAG', 'LlamaIndex', 'Ollama'],
+      repo: 'Building-Local-LLMs-for-Private-Workflows', glyph: 'Ask your documents'
+    },
+    {
+      id: 'land', title: 'Land Attributes Dashboard', featured: true, status: 'live', cats: ['gis', 'dash', 'auto'],
+      blurb: 'A parcel map and review tool for land attributes across 8,000+ Gunnison County parcels. When a new export is uploaded, a GitHub Actions pipeline rebuilds and redeploys the data. A separate edition for internal county use reads directly from the RealWare API.',
+      stack: ['MapLibre', 'JavaScript', 'Python', 'GitHub Actions'],
+      live: PAGES + 'gunnison-land-attributes-demo/', repo: 'gunnison-land-attributes-demo', glyph: '8,000+ parcels, one map'
+    },
+    {
+      id: 'letters', title: 'AI Letter Assistant', status: 'code', cats: ['ai', 'auto'],
+      blurb: 'A GPT-powered app that drafts appeal responses, exemption notices, valuation explanations, and inquiry replies in a chosen tone, turning a recurring office writing task into a fill-in-the-form workflow.',
+      stack: ['Python', 'OpenAI API', 'Streamlit', 'Prompt engineering'],
+      repo: 'gunnison_ai_demos', glyph: 'Drafts in seconds'
+    },
+    {
+      id: 'audit', title: 'Assessor Website Audit', status: 'live', cats: ['ai', 'analysis'],
+      blurb: 'Ran the same research prompt and scoring rubric through ChatGPT, Gemini, and Claude, compared 24 Colorado counties, and merged the three reviews into one ranked action plan. One model caught a new state deadline change the other two missed.',
+      stack: ['Prompt engineering', 'OpenAI API', 'Claude API', 'Gemini'],
+      live: PAGES + 'gunnison-assessor-audit/', repo: 'gunnison-assessor-audit', glyph: '3 models, 24 counties'
     },
     {
       id: 'permit', title: 'Gunnison Permit Portal', status: 'code', cats: ['apps'],
@@ -73,20 +91,8 @@
       live: PAGES + 'gunnison-county-property-tax-calculator/', repo: 'gunnison-county-property-tax-calculator', glyph: 'Value × rate × mills'
     },
     {
-      id: 'audit', title: 'Assessor Website Audit', status: 'live', cats: ['ai', 'analysis'],
-      blurb: 'Had ChatGPT, Gemini, and Claude each review the assessor website, compared 24 Colorado counties, and merged the findings into one action plan.',
-      stack: ['OpenAI API', 'Claude API', 'Excel'],
-      live: PAGES + 'gunnison-assessor-audit/', repo: 'gunnison-assessor-audit', glyph: '3 models, 24 counties'
-    },
-    {
-      id: 'llm', title: 'Private Local AI Workflows', status: 'code', cats: ['ai'],
-      blurb: 'Two fully offline LLM projects for working with sensitive data without sending it to a third party.',
-      stack: ['Python', 'Ollama', 'LlamaIndex'],
-      repo: 'Building-Local-LLMs-for-Private-Workflows', glyph: 'Offline, private LLMs'
-    },
-    {
-      id: 'airport', title: 'Gunnison Airport Tracker', status: 'code', cats: ['apps'],
-      blurb: 'A real-time flight tracker for KGUC built on the OpenSky API, logging private flights to PostgreSQL.',
+      id: 'airport', title: 'Gunnison Airport Tracker', status: 'code', cats: ['apps', 'auto'],
+      blurb: 'An automated flight tracker for KGUC that pulls live data from the OpenSky REST API and logs private flights to PostgreSQL.',
       stack: ['Node.js', 'PostgreSQL', 'REST APIs'],
       repo: 'gunnison-airport-tracker', glyph: 'KGUC, in real time'
     },
@@ -108,8 +114,8 @@
     { group: 'Data & analysis', items: ['SQL', 'SQL Server', 'PostgreSQL', 'Access', 'Python', 'R', 'SAS', 'Excel', 'ETL & QA'] },
     { group: 'GIS & spatial', items: ['PostGIS', 'MapLibre', 'Leaflet', 'GDAL', 'GeoPandas', 'OGC APIs', 'Earth Engine', 'GeoJSON'] },
     { group: 'Visualization', items: ['Data viz', 'Plotly', 'SVG', 'Tableau', 'Power BI'] },
-    { group: 'Development', items: ['JavaScript', 'TypeScript', 'React', 'Node.js', 'FastAPI', 'REST APIs', 'Docker', 'nginx', 'AWS', 'GitHub Actions'] },
-    { group: 'AI', items: ['Claude API', 'OpenAI API', 'Ollama', 'LlamaIndex'] },
+    { group: 'Development', items: ['JavaScript', 'TypeScript', 'React', 'Node.js', 'FastAPI', 'REST APIs', 'Docker', 'nginx', 'AWS'] },
+    { group: 'AI & automation', items: ['Claude API', 'OpenAI API', 'Gemini', 'Vision AI', 'RAG', 'Prompt engineering', 'LlamaIndex', 'Ollama', 'Streamlit', 'GitHub Actions'] },
     { group: 'Assessment', items: ['Mass appraisal', 'Ad valorem assessment', 'Certification of value', 'Sales analysis', 'USPAP'] }
   ];
   // Skills that live under a broader stack label on project cards.
