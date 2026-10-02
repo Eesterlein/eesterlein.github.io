@@ -188,6 +188,8 @@ button.skill.on sup { color: inherit; }
 .timeline h3 span { color: var(--muted); font-size: .7em; }
 .timeline ul { margin: 14px 0 0; padding-left: 18px; color: var(--muted); max-width: 72ch; }
 .timeline ul li { margin-bottom: 6px; }
+.timeline a, .track a { color: inherit; text-decoration-color: var(--accent); text-underline-offset: 3px; }
+.timeline a:hover, .track a:hover { color: var(--accent); }
 
 .license { display: grid; grid-template-columns: 1fr 1.4fr; gap: 32px; align-items: center; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 28px; }
 .license h3 { font-size: 26px; }

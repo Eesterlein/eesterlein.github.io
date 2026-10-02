@@ -8,7 +8,7 @@
   const PROJECTS = [
     {
       id: 'assessor-map', title: 'Assessor Map Platform', featured: true, status: 'live', cats: ['gis', 'apps', 'auto'],
-      blurb: 'A full-stack GIS platform where non-technical staff upload data, configure interactive maps, and join Excel or CSV records to parcels without GIS software. Wildfire detections refresh every 30 minutes, and it runs on Docker and nginx with firewalling and automated backups.',
+      blurb: 'A production GIS platform where non-technical staff configure maps, upload shapefiles, and create “virtual layers” that join any Excel or CSV dataset to parcels by account number, with no GIS software needed. Includes live NASA FIRMS wildfire detections every 30 minutes, deployed with Docker, nginx, firewall hardening, and daily backups.',
       stack: ['React', 'TypeScript', 'Node.js', 'MapLibre', 'PostGIS', 'GDAL', 'OGC APIs', 'Docker', 'nginx'],
       live: 'http://165.232.147.15', repo: 'assessor-map', glyph: 'Parcels + live wildfire layers'
     },
@@ -21,20 +21,20 @@
     {
       id: 'photo', title: 'Appraiser Photo Processor', featured: true, status: 'code', cats: ['ai', 'auto', 'apps'],
       blurb: 'Multimodal AI used in daily work. The app reads each field photo’s GPS and compass data, matches it to the nearest parcel, classifies the shot with Claude Vision, and renames it to the office’s standard. It replaced a manual sorting step for appraisers at about $0.002 per photo and runs on staff Windows machines.',
-      stack: ['Python', 'Claude API', 'Vision AI', 'Prompt engineering', 'PyInstaller'],
+      stack: ['Python', 'Claude API', 'Vision AI', 'CLIP', 'Prompt engineering', 'PyInstaller'],
       repo: 'Appraiser-Photo-Processor', glyph: 'GPS + vision AI → filed photos'
     },
     {
       id: 'llm', title: 'Private RAG Chatbot', status: 'code', cats: ['ai'],
       blurb: 'A retrieval-augmented chatbot that answers questions from internal policy documents, plus an on-device coding assistant. Both run entirely on local open-source models, so sensitive data never leaves the machine.',
-      stack: ['Python', 'RAG', 'LlamaIndex', 'Ollama'],
+      stack: ['Python', 'RAG', 'LlamaIndex', 'Ollama', 'Vector indexing'],
       repo: 'Building-Local-LLMs-for-Private-Workflows', glyph: 'Ask your documents'
     },
     {
       id: 'land', title: 'Land Attributes Dashboard', featured: true, status: 'live', cats: ['gis', 'dash', 'auto'],
-      blurb: 'A parcel map and review tool for land attributes across 8,000+ Gunnison County parcels. When a new export is uploaded, a GitHub Actions pipeline rebuilds and redeploys the data. A separate edition for internal county use reads directly from the RealWare API.',
-      stack: ['MapLibre', 'JavaScript', 'Python', 'GitHub Actions'],
-      live: PAGES + 'gunnison-land-attributes-demo/', repo: 'gunnison-land-attributes-demo', glyph: '8,000+ parcels, one map'
+      blurb: 'A parcel map and review tool covering every tax parcel in the county (about 17,500 parcels and 21,000 accounts). It flags missing attributes, parcels that don’t match their neighbors, and data-entry errors, then exports review lists. Uploading a new export triggers a GitHub Actions pipeline that cleans the data and republishes the site in about two minutes.',
+      stack: ['MapLibre', 'JavaScript', 'Python', 'Pandas', 'GeoPandas', 'GitHub Actions'],
+      live: PAGES + 'gunnison-land-attributes-demo/', repo: 'gunnison-land-attributes-demo', glyph: '17,500 parcels, one map'
     },
     {
       id: 'audit', title: 'Assessor Website Audit', status: 'live', cats: ['ai', 'analysis'],
@@ -43,9 +43,9 @@
       live: PAGES + 'gunnison-assessor-audit/', repo: 'gunnison-assessor-audit', glyph: '3 models, 24 counties'
     },
     {
-      id: 'permit', title: 'Gunnison Permit Portal', status: 'code', cats: ['apps'],
-      blurb: 'Public building-permit search plus a staff admin portal for four jurisdictions, with authentication, database-backed records, and document attachments. Deployed on AWS.',
-      stack: ['React', 'Tailwind', 'Node.js', 'PostgreSQL', 'Prisma', 'AWS'],
+      id: 'permit', title: 'Gunnison Permit Portal', featured: true, status: 'code', cats: ['apps'],
+      blurb: 'Public building-permit search plus a staff portal for four jurisdictions. Staff upload CSV or Excel exports from their existing systems, and the app learns each jurisdiction’s column layout and remembers it for next time. Includes JWT authentication, inspection tracking, and document attachments on AWS.',
+      stack: ['React', 'Tailwind', 'Node.js', 'PostgreSQL', 'Prisma', 'AWS', 'REST APIs'],
       repo: 'gunnison-permit-portal', glyph: '4 jurisdictions, 1 search'
     },
     {
@@ -56,7 +56,7 @@
     },
     {
       id: 'condition', title: 'Residential Condition Dashboard', status: 'live', cats: ['dash', 'analysis'], img: 'condition.jpg',
-      blurb: 'Condition, quality, and value of 10,885 principal residential structures, broken out by economic area.',
+      blurb: 'Condition, quality, and value of 10,885 principal residential structures across economic areas, representing over $9.4B in residential improvement value.',
       stack: ['Plotly', 'JavaScript', 'Data viz'],
       live: PAGES + 'gunnison-residential-condition/', repo: 'gunnison-residential-condition'
     },
@@ -68,14 +68,20 @@
     },
     {
       id: 'staticmap', title: 'Parcel Value Map', status: 'live', cats: ['gis'], img: 'staticmap.jpg',
-      blurb: 'A lightweight Leaflet map of county parcels, colored by view, exterior condition, or value.',
-      stack: ['Leaflet', 'JavaScript', 'GeoJSON'],
+      blurb: 'A lightweight Leaflet map that joins assessment CSVs to parcel boundaries at 97% coverage, so appraisers can style parcels by view, condition, or value and spot gaps and outliers.',
+      stack: ['Leaflet', 'JavaScript', 'GeoJSON', 'ETL & QA'],
       live: PAGES + 'gunnison_gis_mapping_static_demo/', repo: 'gunnison_gis_mapping_static_demo'
     },
     {
-      id: 'ownership', title: 'Who Owns Colorado?', status: 'live', cats: ['gis', 'analysis'],
-      blurb: 'Geospatial analysis of public vs. private land ownership statewide, with a Gunnison County case study.',
-      stack: ['Python', 'GeoPandas', 'PostGIS'],
+      id: 'explorer', title: 'Gunnison County Map Explorer', status: 'code', cats: ['gis', 'apps'],
+      blurb: 'Turns legacy county shapefiles into a modern web map: PostGIS serves parcels, jurisdictions, and towns through a standards-based OGC API, and a React front end lets staff toggle layers, switch street, satellite, and terrain base maps, and fly between towns.',
+      stack: ['React', 'TypeScript', 'MapLibre', 'PostGIS', 'OGC APIs', 'Docker'],
+      repo: 'Gunnison-County-Map-Explorer', glyph: 'Shapefiles → OGC API → web map'
+    },
+    {
+      id: 'ownership', title: 'Who Owns Colorado?', featured: true, status: 'live', cats: ['gis', 'analysis'],
+      blurb: 'Who owns the state? 62.6% of Colorado land is private, but in Gunnison County over 76% is public, and private parcels show growing out-of-county ownership.',
+      stack: ['Python', 'GeoPandas', 'Pandas', 'PostGIS'],
       live: PAGES + 'colorado-land-ownership/', repo: 'colorado-land-ownership', glyph: 'Public vs. private land'
     },
     {
@@ -86,24 +92,24 @@
     },
     {
       id: 'airport', title: 'Gunnison Airport Tracker', status: 'code', cats: ['apps', 'auto'],
-      blurb: 'An automated flight tracker for KGUC that pulls live data from the OpenSky REST API and logs private flights to PostgreSQL.',
+      blurb: 'An automated flight tracker for KGUC that pulls OpenSky REST API data every hour, logs repeat private aircraft to PostgreSQL, and was deployed on Heroku.',
       stack: ['Node.js', 'PostgreSQL', 'REST APIs'],
       repo: 'gunnison-airport-tracker', glyph: 'KGUC, in real time'
     },
     {
-      id: 'acs', title: 'U.S. Demographics in SQL', status: 'code', cats: ['analysis'],
-      blurb: 'State-level demographic analysis of 2019 American Community Survey data, written entirely in SQL.',
-      stack: ['SQL'],
-      repo: 'us-state-demographics-sql-acs2019', glyph: 'ACS 2019 × SQL'
+      id: 'acs', title: 'U.S. Demographics in SQL', status: 'live', cats: ['analysis'],
+      blurb: 'Ranked every U.S. state on poverty, income, unemployment, education, and rent burden from 2019 Census data using CTEs and window functions, then built an interactive Looker Studio dashboard.',
+      stack: ['SQL', 'BigQuery', 'Looker Studio'],
+      live: 'https://lookerstudio.google.com/s/mNjbN_gsXoQ', repo: 'us-state-demographics-sql-acs2019', glyph: 'ACS 2019 × SQL'
     }
   ];
 
   const SKILLS = [
-    { group: 'Data & analysis', items: ['SQL', 'SQL Server', 'PostgreSQL', 'Access', 'Python', 'R', 'SAS', 'Excel', 'ETL & QA'] },
+    { group: 'Data & analysis', items: ['SQL', 'SQL Server', 'PostgreSQL', 'BigQuery', 'Access', 'Python', 'Pandas', 'R', 'SAS', 'Excel', 'ETL & QA'] },
     { group: 'GIS & spatial', items: ['PostGIS', 'MapLibre', 'Leaflet', 'GDAL', 'GeoPandas', 'OGC APIs', 'Earth Engine', 'GeoJSON'] },
-    { group: 'Visualization', items: ['Data viz', 'Plotly', 'SVG', 'Tableau', 'Power BI'] },
+    { group: 'Visualization', items: ['Data viz', 'Tableau', 'Power BI', 'Looker Studio', 'Plotly', 'SVG'] },
     { group: 'Development', items: ['JavaScript', 'TypeScript', 'React', 'Node.js', 'FastAPI', 'REST APIs', 'Docker', 'nginx', 'AWS'] },
-    { group: 'AI & automation', items: ['Claude API', 'OpenAI API', 'Gemini', 'Vision AI', 'RAG', 'Prompt engineering', 'LlamaIndex', 'Ollama', 'Streamlit', 'GitHub Actions'] },
+    { group: 'AI & automation', items: ['Claude API', 'OpenAI API', 'Gemini', 'Vision AI', 'CLIP', 'RAG', 'Vector indexing', 'Prompt engineering', 'LlamaIndex', 'Ollama', 'GitHub Actions'] },
     { group: 'Assessment', items: ['Mass appraisal', 'Ad valorem assessment', 'Certification of value', 'Sales analysis', 'USPAP'] }
   ];
   // Skills that live under a broader stack label on project cards.
