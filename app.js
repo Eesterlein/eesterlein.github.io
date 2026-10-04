@@ -31,13 +31,13 @@
       repo: 'Building-Local-LLMs-for-Private-Workflows', glyph: 'Ask your documents'
     },
     {
-      id: 'land', title: 'Land Attributes Dashboard', featured: true, status: 'live', cats: ['gis', 'dash', 'auto'],
+      id: 'land', title: 'Land Attributes Dashboard', featured: true, status: 'live', img: 'land.jpg', cats: ['gis', 'dash', 'auto'],
       blurb: 'A parcel map and review tool covering every tax parcel in the county (about 17,500 parcels and 21,000 accounts). It flags missing attributes, parcels that don’t match their neighbors, and data-entry errors, then exports review lists. Uploading a new export triggers a GitHub Actions pipeline that cleans the data and republishes the site in about two minutes.',
       stack: ['MapLibre', 'JavaScript', 'Python', 'Pandas', 'GeoPandas', 'GitHub Actions'],
       live: PAGES + 'gunnison-land-attributes-demo/', repo: 'gunnison-land-attributes-demo', glyph: '17,500 parcels, one map'
     },
     {
-      id: 'audit', title: 'Assessor Website Audit', status: 'live', cats: ['ai', 'analysis'],
+      id: 'audit', title: 'Assessor Website Audit', status: 'live', img: 'audit.jpg', cats: ['ai', 'analysis'],
       blurb: 'Ran the same research prompt and scoring rubric through ChatGPT, Gemini, and Claude, compared 24 Colorado counties, and merged the three reviews into one ranked action plan. One model caught a new state deadline change the other two missed.',
       stack: ['Prompt engineering', 'OpenAI API', 'Claude API', 'Gemini'],
       live: PAGES + 'gunnison-assessor-audit/', repo: 'gunnison-assessor-audit', glyph: '3 models, 24 counties'
@@ -79,7 +79,7 @@
       repo: 'Gunnison-County-Map-Explorer', glyph: 'Shapefiles → OGC API → web map'
     },
     {
-      id: 'ownership', title: 'Who Owns Colorado?', featured: true, status: 'live', cats: ['gis', 'analysis'],
+      id: 'ownership', title: 'Who Owns Colorado?', featured: true, status: 'live', img: 'ownership.jpg', cats: ['gis', 'analysis'],
       blurb: 'Who owns the state? 62.6% of Colorado land is private, but in Gunnison County over 76% is public, and private parcels show growing out-of-county ownership.',
       stack: ['Python', 'GeoPandas', 'Pandas', 'PostGIS'],
       live: PAGES + 'colorado-land-ownership/', repo: 'colorado-land-ownership', glyph: 'Public vs. private land'
