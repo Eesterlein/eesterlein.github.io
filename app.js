@@ -7,7 +7,7 @@
   // status: live | code | dev. img: screenshot in /img, otherwise a generated contour map.
   const PROJECTS = [
     {
-      id: 'assessor-map', title: 'Assessor Map Platform', featured: true, status: 'live', cats: ['gis', 'apps', 'auto'],
+      id: 'assessor-map', title: 'Assessor Map Platform', featured: true, status: 'live', img: 'assessormap.jpg', cats: ['gis', 'apps', 'auto'],
       blurb: 'A production GIS platform where non-technical staff configure maps, upload shapefiles, and create “virtual layers” that join any Excel or CSV dataset to parcels by account number, with no GIS software needed. Includes live NASA FIRMS wildfire detections every 30 minutes, deployed with Docker, nginx, firewall hardening, and daily backups.',
       stack: ['React', 'TypeScript', 'Node.js', 'MapLibre', 'PostGIS', 'GDAL', 'OGC APIs', 'Docker', 'nginx'],
       live: 'http://165.232.147.15', repo: 'assessor-map', glyph: 'Parcels + live wildfire layers'
@@ -43,7 +43,7 @@
       live: PAGES + 'gunnison-assessor-audit/', repo: 'gunnison-assessor-audit', glyph: '3 models, 24 counties'
     },
     {
-      id: 'permit', title: 'Gunnison Permit Portal', featured: true, status: 'code', cats: ['apps'],
+      id: 'permit', title: 'Gunnison Permit Portal', featured: true, status: 'code', img: 'permit.jpg', cats: ['apps'],
       blurb: 'Public building-permit search plus a staff portal for four jurisdictions. Staff upload CSV or Excel exports from their existing systems, and the app learns each jurisdiction’s column layout and remembers it for next time. Includes JWT authentication, inspection tracking, and document attachments on AWS.',
       stack: ['React', 'Tailwind', 'Node.js', 'PostgreSQL', 'Prisma', 'AWS', 'REST APIs'],
       repo: 'gunnison-permit-portal', glyph: '4 jurisdictions, 1 search'
