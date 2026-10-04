@@ -85,7 +85,7 @@
       live: PAGES + 'colorado-land-ownership/', repo: 'colorado-land-ownership', glyph: 'Public vs. private land'
     },
     {
-      id: 'tax', title: 'Property Tax Calculator', status: 'live', cats: ['apps'],
+      id: 'tax', title: 'Property Tax Calculator', status: 'live', img: 'tax.jpg', cats: ['apps'],
       blurb: 'An educational estimator that shows how actual value, assessment rates, and mill levies turn into a tax bill.',
       stack: ['JavaScript'],
       live: PAGES + 'gunnison-county-property-tax-calculator/', repo: 'gunnison-county-property-tax-calculator', glyph: 'Value × rate × mills'
@@ -100,7 +100,7 @@
       id: 'acs', title: 'U.S. Demographics in SQL', status: 'live', cats: ['analysis'],
       blurb: 'Ranked every U.S. state on poverty, income, unemployment, education, and rent burden from 2019 Census data using CTEs and window functions, then built an interactive Looker Studio dashboard.',
       stack: ['SQL', 'BigQuery', 'Looker Studio'],
-      live: 'https://lookerstudio.google.com/s/mNjbN_gsXoQ', repo: 'us-state-demographics-sql-acs2019', glyph: 'ACS 2019 × SQL'
+      live: 'https://datastudio.google.com/s/uXnrNlgCZN0', repo: 'us-state-demographics-sql-acs2019', glyph: 'ACS 2019 × SQL'
     }
   ];
 
