@@ -10,7 +10,8 @@
       id: 'assessor-map', title: 'Assessor Map Platform', featured: true, status: 'live', img: 'assessormap.jpg', cats: ['gis', 'apps', 'auto'],
       blurb: 'A production GIS platform where non-technical staff configure maps, upload shapefiles, and create “virtual layers” that join any Excel or CSV dataset to parcels by account number, with no GIS software needed. Includes live NASA FIRMS wildfire detections every 30 minutes, deployed with Docker, nginx, firewall hardening, and daily backups.',
       stack: ['React', 'TypeScript', 'Node.js', 'MapLibre', 'PostGIS', 'GDAL', 'OGC APIs', 'Docker', 'nginx'],
-      live: 'http://165.232.147.15', repo: 'assessor-map', glyph: 'Parcels + live wildfire layers'
+      live: 'http://165.232.147.15', repo: 'assessor-map', glyph: 'Parcels + live wildfire layers',
+      demo: { url: 'http://165.232.147.15/admin/', login: 'demo / gunnison-demo' }
     },
     {
       id: 'building', title: 'The Shape of Gunnison’s Building Stock', status: 'live', cats: ['dash', 'analysis'], img: 'building.jpg',
@@ -262,8 +263,10 @@
           <h3>${p.title}</h3>
           <p>${p.blurb}</p>
           <div class="stack">${p.stack.map((s) => `<span data-skill="${s}">${s}</span>`).join('')}</div>
+          ${p.demo ? `<p class="demo-note mono">Admin demo login: <b>${p.demo.login}</b> · resets nightly, so explore freely</p>` : ''}
           <div class="card-links">
             ${p.live ? `<a href="${p.live}" target="_blank" rel="noopener">Open live ↗</a>` : ''}
+            ${p.demo ? `<a href="${p.demo.url}" target="_blank" rel="noopener">Try the admin ↗</a>` : ''}
             <a href="${GH + p.repo}" target="_blank" rel="noopener">Code ↗</a>
           </div>
         </div>
