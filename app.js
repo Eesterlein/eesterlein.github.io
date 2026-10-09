@@ -62,10 +62,10 @@
       live: PAGES + 'gunnison-residential-condition/', repo: 'gunnison-residential-condition'
     },
     {
-      id: 'eye', title: 'Property Eye', status: 'dev', cats: ['gis', 'ai'],
-      blurb: 'Satellite change detection that flags parcels with likely new construction from a Sentinel-2 built-up index, so appraisers know where to look first.',
-      stack: ['Python', 'FastAPI', 'Earth Engine', 'PostGIS', 'React'],
-      repo: 'gunnison-property-eye', glyph: 'New construction, from orbit'
+      id: 'eye', title: 'Property Eye', status: 'live', img: 'eye.jpg', cats: ['gis', 'ai', 'auto'],
+      blurb: 'Satellite change detection across 20,201 tax parcels that flags likely new construction while ignoring change on neighboring lots. Checked against aerial photos, 6 of the 8 strongest flags were real. Reviewers swipe between dated aerial photos back to 2005.',
+      stack: ['Python', 'FastAPI', 'Earth Engine', 'PostGIS', 'React', 'MapLibre', 'Docker'],
+      live: 'https://64.23.133.119.sslip.io', repo: 'gunnison-property-eye', glyph: 'New construction, from orbit'
     },
     {
       id: 'staticmap', title: 'Parcel Value Map', status: 'live', cats: ['gis'], img: 'staticmap.jpg',
