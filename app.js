@@ -26,6 +26,12 @@
       repo: 'Appraiser-Photo-Processor', glyph: 'GPS + vision AI → filed photos'
     },
     {
+      id: 'fieldguide', title: 'AI Field Guide', featured: true, status: 'live', img: 'aifield.jpg', cats: ['ai', 'apps'],
+      blurb: 'An interactive guide to the AI words programmers keep hearing (agent, harness, context window, MCP, RAG), with 13 hands-on demos: watch text split into tokens, overflow a context window, run an agent loop, plug in MCP servers, and spot the made-up claims in an AI answer. Every term has a plain-English and a developer explanation.',
+      stack: ['JavaScript', 'SVG', 'Data viz', 'RAG', 'Prompt engineering'],
+      live: PAGES + 'ai-field-guide/', repo: 'ai-field-guide', glyph: 'AI vocabulary, animated'
+    },
+    {
       id: 'llm', title: 'Private RAG Chatbot', status: 'code', cats: ['ai'],
       blurb: 'A retrieval-augmented chatbot that answers questions from internal policy documents, plus an on-device coding assistant. Both run entirely on local open-source models, so sensitive data never leaves the machine.',
       stack: ['Python', 'RAG', 'LlamaIndex', 'Ollama', 'Vector indexing'],
@@ -62,7 +68,7 @@
       live: PAGES + 'gunnison-residential-condition/', repo: 'gunnison-residential-condition'
     },
     {
-      id: 'eye', title: 'Property Eye', status: 'live', img: 'eye.jpg', cats: ['gis', 'ai', 'auto'],
+      id: 'eye', title: 'Property Eye', featured: true, status: 'live', img: 'eye.jpg', cats: ['gis', 'ai', 'auto'],
       blurb: 'Satellite change detection across 20,201 tax parcels that flags likely new construction while ignoring change on neighboring lots. Checked against aerial photos, 6 of the 8 strongest flags were real. Reviewers swipe between dated aerial photos back to 2005.',
       stack: ['Python', 'FastAPI', 'Earth Engine', 'PostGIS', 'React', 'MapLibre', 'Docker'],
       live: 'https://64.23.133.119.sslip.io', repo: 'gunnison-property-eye', glyph: 'New construction, from orbit'
