@@ -27,7 +27,7 @@
     },
     {
       id: 'fieldguide', title: 'AI Field Guide', featured: true, status: 'live', img: 'aifield.jpg', cats: ['ai', 'apps'],
-      blurb: 'An interactive guide to the AI words programmers keep hearing (agent, harness, context window, MCP, RAG), with 13 hands-on demos: watch text split into tokens, overflow a context window, run an agent loop, plug in MCP servers, and spot the made-up claims in an AI answer. Every term has a plain-English and a developer explanation.',
+      blurb: 'An interactive guide to the AI words programmers keep hearing (agent, harness, context window, MCP, RAG), with 14 hands-on demos: watch text split into tokens, overflow a context window, see why too much context confuses a model, run an agent loop, plug in MCP servers, and spot the made-up claims in an AI answer. Every term has a plain-English and a developer explanation.',
       stack: ['JavaScript', 'SVG', 'Data viz', 'RAG', 'Prompt engineering'],
       live: PAGES + 'ai-field-guide/', repo: 'ai-field-guide', glyph: 'AI vocabulary, animated'
     },
