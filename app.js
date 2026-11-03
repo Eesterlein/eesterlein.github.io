@@ -50,6 +50,13 @@
       live: PAGES + 'gunnison-land-attributes-demo/', repo: 'gunnison-land-attributes-demo', glyph: '17,500 parcels, one map'
     },
     {
+      id: 'str', title: 'Gunnison STR Monitor', featured: true, status: 'live', img: 'str.jpg', cats: ['gis', 'dash', 'auto'],
+      blurb: 'A self-updating dashboard of short-term rentals in unincorporated Gunnison County, built ahead of the county\u2019s 2027 STR licensing program. Every Monday a GitHub Action searches about 300 map tiles across four date windows, filters out hotels, campsites and in-town listings, matches each listing to the nearest parcel with a confidence rating, and tracks new and delisted rentals week to week. You can filter, search by owner or address, and export to CSV.',
+      stack: ['Python', 'GeoPandas', 'Web scraping', 'GitHub Actions', 'JavaScript'],
+      live: PAGES + 'gunnison-str-dashboard/', repo: 'gunnison-str-dashboard', glyph: 'Every rental, matched to a parcel',
+      demo: { label: 'Demo login', login: 'demo / gunnison-str-2026', note: '' }
+    },
+    {
       id: 'audit', title: 'Assessor Website Audit', status: 'live', img: 'audit.jpg', cats: ['ai', 'analysis'],
       blurb: 'Ran the same research prompt and scoring rubric through ChatGPT, Gemini, and Claude, compared 24 Colorado counties, and merged the three reviews into one ranked action plan. One model caught a new state deadline change the other two missed.',
       stack: ['Prompt engineering', 'OpenAI API', 'Claude API', 'Gemini'],
@@ -74,7 +81,7 @@
       live: PAGES + 'gunnison-residential-condition/', repo: 'gunnison-residential-condition'
     },
     {
-      id: 'eye', title: 'Property Eye', status: 'live', img: 'eye.jpg', cats: ['gis', 'ai', 'auto'],
+      id: 'eye', title: 'Property Eye', featured: true, status: 'live', img: 'eye.jpg', cats: ['gis', 'ai', 'auto'],
       blurb: 'Satellite change detection across 20,201 tax parcels that flags likely new construction while ignoring change on neighboring lots. Checked against aerial photos, 6 of the 8 strongest flags were real. Reviewers swipe between dated aerial photos back to 2005.',
       stack: ['Python', 'FastAPI', 'Earth Engine', 'PostGIS', 'React', 'MapLibre', 'Docker'],
       live: 'https://64.23.133.119.sslip.io', repo: 'gunnison-property-eye', glyph: 'New construction, from orbit'
@@ -275,10 +282,10 @@
           <h3>${p.title}</h3>
           <p>${p.blurb}</p>
           <div class="stack">${p.stack.map((s) => `<span data-skill="${s}">${s}</span>`).join('')}</div>
-          ${p.demo ? `<p class="demo-note mono">Admin demo login: <b>${p.demo.login}</b> · resets nightly, so explore freely</p>` : ''}
+          ${p.demo ? `<p class="demo-note mono">${p.demo.label || 'Admin demo login'}: <b>${p.demo.login}</b>${p.demo.note === undefined ? ' · resets nightly, so explore freely' : p.demo.note}</p>` : ''}
           <div class="card-links">
             ${p.live ? `<a href="${p.live}" target="_blank" rel="noopener">Open live ↗</a>` : ''}
-            ${p.demo ? `<a href="${p.demo.url}" target="_blank" rel="noopener">Try the admin ↗</a>` : ''}
+            ${p.demo && p.demo.url ? `<a href="${p.demo.url}" target="_blank" rel="noopener">Try the admin ↗</a>` : ''}
             <a href="${GH + p.repo}" target="_blank" rel="noopener">Code ↗</a>
           </div>
         </div>
