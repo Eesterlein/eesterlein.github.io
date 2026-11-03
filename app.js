@@ -318,7 +318,7 @@
     let shown = 0;
     PROJECTS.forEach((p) => {
       const card = $(`.card[data-id="${p.id}"]`);
-      const inCat = state.cat === 'all' || p.cats.includes(state.cat);
+      const inCat = state.cat === 'all' || (state.cat === 'live' ? p.status === 'live' : p.cats.includes(state.cat));
       const inSkill = !state.skill || matchesSkill(p, state.skill);
       card.classList.toggle('hidden', !inCat);
       card.classList.toggle('dim', inCat && !inSkill);
