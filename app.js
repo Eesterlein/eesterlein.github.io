@@ -379,6 +379,7 @@
   function init() {
     renderCards();
     renderSkills();
+    const live = $('#live-count'); if (live) live.dataset.count = PROJECTS.filter((p) => p.status === 'live').length;
     $$('.section-head, .timeline > li, .license, .contact > *').forEach((el) => el.classList.add('reveal'));
     observe();
     const redrawHero = hero();
