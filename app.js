@@ -32,6 +32,12 @@
       live: PAGES + 'ai-field-guide/', repo: 'ai-field-guide', glyph: 'AI vocabulary, animated'
     },
     {
+      id: 'gitguide', title: 'GitHub Field Guide', featured: true, status: 'live', img: 'gitfield.jpg', cats: ['apps'],
+      blurb: 'An interactive Git and GitHub course built around a practice terminal. Learners type real commands, the terminal answers the way Git would, and each step is graded with a hint when it is wrong. 19 lessons go from clone, branches and merge conflicts to SHA hashes, SSH keys, pull requests, GitHub Actions and push protection, while a live panel shows where every change sits and redraws the commit graph.',
+      stack: ['JavaScript', 'SVG', 'Git', 'GitHub Actions'],
+      live: PAGES + 'github-field-guide/', repo: 'github-field-guide', glyph: 'Git, one command at a time'
+    },
+    {
       id: 'llm', title: 'Private RAG Chatbot', status: 'code', cats: ['ai'],
       blurb: 'A retrieval-augmented chatbot that answers questions from internal policy documents, plus an on-device coding assistant. Both run entirely on local open-source models, so sensitive data never leaves the machine.',
       stack: ['Python', 'RAG', 'LlamaIndex', 'Ollama', 'Vector indexing'],
@@ -50,7 +56,7 @@
       live: PAGES + 'gunnison-assessor-audit/', repo: 'gunnison-assessor-audit', glyph: '3 models, 24 counties'
     },
     {
-      id: 'permit', title: 'Gunnison Permit Portal', featured: true, status: 'code', img: 'permit.jpg', cats: ['apps'],
+      id: 'permit', title: 'Gunnison Permit Portal', status: 'code', img: 'permit.jpg', cats: ['apps'],
       blurb: 'Public building-permit search plus a staff portal for four jurisdictions. Staff upload CSV or Excel exports from their existing systems, and the app learns each jurisdiction’s column layout and remembers it for next time. Includes JWT authentication, inspection tracking, and document attachments on AWS.',
       stack: ['React', 'Tailwind', 'Node.js', 'PostgreSQL', 'Prisma', 'AWS', 'REST APIs'],
       repo: 'gunnison-permit-portal', glyph: '4 jurisdictions, 1 search'
@@ -68,7 +74,7 @@
       live: PAGES + 'gunnison-residential-condition/', repo: 'gunnison-residential-condition'
     },
     {
-      id: 'eye', title: 'Property Eye', featured: true, status: 'live', img: 'eye.jpg', cats: ['gis', 'ai', 'auto'],
+      id: 'eye', title: 'Property Eye', status: 'live', img: 'eye.jpg', cats: ['gis', 'ai', 'auto'],
       blurb: 'Satellite change detection across 20,201 tax parcels that flags likely new construction while ignoring change on neighboring lots. Checked against aerial photos, 6 of the 8 strongest flags were real. Reviewers swipe between dated aerial photos back to 2005.',
       stack: ['Python', 'FastAPI', 'Earth Engine', 'PostGIS', 'React', 'MapLibre', 'Docker'],
       live: 'https://64.23.133.119.sslip.io', repo: 'gunnison-property-eye', glyph: 'New construction, from orbit'
