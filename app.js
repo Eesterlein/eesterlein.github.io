@@ -321,6 +321,7 @@
       const inCat = state.cat === 'all' || (state.cat === 'live' ? p.status === 'live' : p.cats.includes(state.cat));
       const inSkill = !state.skill || matchesSkill(p, state.skill);
       card.classList.toggle('hidden', !inCat);
+      if (inCat && state.cat !== 'all') card.classList.add('in');
       card.classList.toggle('dim', inCat && !inSkill);
       if (inCat && inSkill) shown++;
       $$('.stack span', card).forEach((s) => s.classList.toggle('hit', !!state.skill && (ALIAS[state.skill] || [state.skill]).includes(s.dataset.skill)));
