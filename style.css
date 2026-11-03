@@ -116,6 +116,10 @@ h1, h2, h3 { font-family: var(--serif); font-weight: 400; line-height: 1.1; marg
 .stat { background: var(--surface); padding: 24px 22px; }
 .stat b { display: block; font: 400 clamp(32px, 4vw, 44px)/1 var(--serif); color: var(--accent); font-variant-numeric: tabular-nums; }
 .stat span { display: block; margin-top: 8px; font-size: 13px; color: var(--muted); line-height: 1.4; }
+.stat-link { display: block; text-decoration: none; color: inherit; transition: background .2s; }
+.stat-link em { font-style: normal; color: var(--accent); white-space: nowrap; }
+.stat-link:hover { background: var(--surface-2); }
+.stat-link:hover em { text-decoration: underline; }
 
 /* sections */
 .section { max-width: 1180px; margin: 0 auto; padding: 120px 16px 0; }

@@ -384,6 +384,7 @@
     const redrawHero = hero();
 
     $$('.chip').forEach((c) => c.addEventListener('click', () => { state.cat = c.dataset.cat; applyFilter(); }));
+    $$('[data-filter]').forEach((el) => el.addEventListener('click', () => { state.skill = null; state.cat = el.dataset.filter; applyFilter(); }));
     $('#skills-list').addEventListener('click', (e) => {
       const b = e.target.closest('button.skill'); if (!b) return;
       state.skill = state.skill === b.dataset.skill ? null : b.dataset.skill;
