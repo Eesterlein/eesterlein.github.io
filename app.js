@@ -27,7 +27,7 @@
     },
     {
       id: 'fieldguide', title: 'AI Field Guide', featured: true, status: 'live', img: 'aifield.jpg', cats: ['ai', 'apps'],
-      blurb: 'An interactive guide to the AI words programmers keep hearing (agent, harness, context window, MCP, RAG), from the history and math behind attention to a typo-friendly prompt playground. 20 hands-on demos: play the Turing test, overflow a context window, run an agent loop, plug in MCP servers, do king − man + woman, and spot the made-up claims in an AI answer. Every term has a plain-English and a developer explanation.',
+      blurb: 'An interactive guide to the AI words programmers keep hearing (agent, harness, context window, MCP, RAG), from the history and math behind attention to a typo-friendly prompt playground. A Quick start walks through what to do once a chat is open: ask, give context, plan with clear rules and a stop point, review the plan, implement, stay in the loop, and record specs and decisions for the next agent. 21 hands-on demos: play the Turing test, overflow a context window, run an agent loop, plug in MCP servers, do king − man + woman, and spot the made-up claims in an AI answer. Every term has a plain-English and a developer explanation.',
       stack: ['JavaScript', 'SVG', 'Data viz', 'RAG', 'Prompt engineering'],
       live: PAGES + 'ai-field-guide/', repo: 'ai-field-guide', glyph: 'AI vocabulary, animated'
     },
