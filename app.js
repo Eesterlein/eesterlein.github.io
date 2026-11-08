@@ -57,6 +57,12 @@
       demo: { label: 'Demo login', login: 'demo / gunnison-str-2026', note: '' }
     },
     {
+      id: 'bluemesa', title: 'Blue Mesa Water Report', featured: true, status: 'live', img: 'bluemesa.jpg', cats: ['dash', 'analysis', 'auto'],
+      blurb: 'How full is Colorado’s largest lake, and how much is the dam letting out? Built from every daily Bureau of Reclamation reading since 1968, it shows the reservoir hitting an all-time low in October 2026. Charts are titled as the questions they answer: has the lake ever been this low, how this year compares with all 58 others, and which years released the most and least water. One script re-downloads the data and rebuilds the page.',
+      stack: ['Python', 'JavaScript', 'D3.js', 'Data viz'],
+      live: PAGES + 'blue-mesa-water-report/', repo: 'blue-mesa-water-report', glyph: '58 years of lake levels'
+    },
+    {
       id: 'audit', title: 'Assessor Website Audit', status: 'live', img: 'audit.jpg', cats: ['ai', 'analysis'],
       blurb: 'Ran the same research prompt and scoring rubric through ChatGPT, Gemini, and Claude, compared 24 Colorado counties, and merged the three reviews into one ranked action plan. One model caught a new state deadline change the other two missed.',
       stack: ['Prompt engineering', 'OpenAI API', 'Claude API', 'Gemini'],
@@ -109,6 +115,12 @@
       blurb: 'An educational estimator that shows how actual value, assessment rates, and mill levies turn into a tax bill.',
       stack: ['JavaScript'],
       live: PAGES + 'gunnison-county-property-tax-calculator/', repo: 'gunnison-county-property-tax-calculator', glyph: 'Value × rate × mills'
+    },
+    {
+      id: 'assessoryear', title: 'The Assessor’s Year', status: 'live', img: 'assessoryear.jpg', cats: ['apps', 'dash'],
+      blurb: 'An unofficial interactive guide to Colorado’s two-year property tax cycle. Pick the year you pay your bill and it shows which home-sale date and which January 1 your bill is based on, then walks through each step from valuation to tax bill, with upcoming deadlines counted down automatically.',
+      stack: ['JavaScript', 'SVG'],
+      live: PAGES + 'gunnison-assessor-year/', repo: 'gunnison-assessor-year', glyph: 'Which year am I paying for?'
     },
     {
       id: 'airport', title: 'Gunnison Airport Tracker', status: 'code', cats: ['apps', 'auto'],
