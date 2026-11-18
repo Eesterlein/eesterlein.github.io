@@ -7,20 +7,26 @@
   // status: live | code | dev. img: screenshot in /img, otherwise a generated contour map.
   const PROJECTS = [
     {
-      id: 'assessor-map', title: 'Assessor Map Platform', featured: true, status: 'live', img: 'assessormap.jpg', cats: ['gis', 'apps', 'auto'],
+      id: 'covid', title: 'COVID Trials AI', featured: true, status: 'live', img: 'covid.jpg', cats: ['ai', 'apps'],
+      blurb: 'Ask a question about COVID-19 and get an answer drawn from 10,269 ClinicalTrials.gov records and 1,630 open-access papers, with every claim linked to its source. Claude searches the trials (vector and keyword search with a medical reranker), reads posted results, and runs statistics such as pooled risk ratios in a code sandbox. A 20-question eval compared three Claude models and caught two real bugs before launch; spend caps, rate limits and a bot check keep the public demo cheap to run.',
+      stack: ['Python', 'Claude API', 'RAG', 'Tool use', 'Evals', 'LanceDB', 'FastAPI', 'Hugging Face'],
+      live: 'https://huggingface.co/spaces/Eesterlein/covid-trials-ai', repo: 'covid-trials-ai', glyph: '10,269 trials, every claim cited'
+    },
+    {
+      id: 'assessor-map', title: 'Assessor Map Platform', featured: true, status: 'live', img: 'assessormap.jpg', cats: ['gis', 'apps'],
       blurb: 'A production GIS platform where non-technical staff configure maps, upload shapefiles, and create “virtual layers” that join any Excel or CSV dataset to parcels by account number, with no GIS software needed. Includes live NASA FIRMS wildfire detections every 30 minutes, deployed with Docker, nginx, firewall hardening, and daily backups.',
       stack: ['React', 'TypeScript', 'Node.js', 'MapLibre', 'PostGIS', 'GDAL', 'OGC APIs', 'Docker', 'nginx'],
       live: 'http://165.232.147.15', repo: 'assessor-map', glyph: 'Parcels + live wildfire layers',
       demo: { url: 'http://165.232.147.15/admin/', login: 'demo / gunnison-demo' }
     },
     {
-      id: 'building', title: 'The Shape of Gunnison’s Building Stock', status: 'live', cats: ['dash', 'analysis'], img: 'building.jpg',
+      id: 'building', title: 'The Shape of Gunnison’s Building Stock', status: 'live', cats: ['dash'], img: 'building.jpg',
       blurb: 'A data story built from 18,312 assessor building records: what got built, when, how big, and how it’s graded.',
       stack: ['JavaScript', 'SVG', 'Data viz'],
       live: PAGES + 'gunnison-building-stock/', repo: 'gunnison-building-stock'
     },
     {
-      id: 'photo', title: 'Appraiser Photo Processor', featured: true, status: 'code', cats: ['ai', 'auto', 'apps'],
+      id: 'photo', title: 'Appraiser Photo Processor', featured: true, status: 'code', img: 'photo.jpg', cats: ['ai', 'apps'],
       blurb: 'Multimodal AI used in daily work. The app reads each field photo’s GPS and compass data, matches it to the nearest parcel, classifies the shot with Claude Vision, and renames it to the office’s standard. It replaced a manual sorting step for appraisers at about $0.002 per photo and runs on staff Windows machines.',
       stack: ['Python', 'Claude API', 'Vision AI', 'CLIP', 'Prompt engineering', 'PyInstaller'],
       repo: 'Appraiser-Photo-Processor', glyph: 'GPS + vision AI → filed photos'
@@ -38,77 +44,72 @@
       live: PAGES + 'github-field-guide/', repo: 'github-field-guide', glyph: 'Git, one command at a time'
     },
     {
-      id: 'llm', title: 'Private RAG Chatbot', status: 'code', cats: ['ai'],
+      id: 'llm', title: 'Private RAG Chatbot', status: 'code', img: 'llm.jpg', cats: ['ai'],
       blurb: 'A retrieval-augmented chatbot that answers questions from internal policy documents, plus an on-device coding assistant. Both run entirely on local open-source models, so sensitive data never leaves the machine.',
       stack: ['Python', 'RAG', 'LlamaIndex', 'Ollama', 'Vector indexing'],
       repo: 'Building-Local-LLMs-for-Private-Workflows', glyph: 'Ask your documents'
     },
     {
-      id: 'land', title: 'Land Attributes Dashboard', featured: true, status: 'live', img: 'land.jpg', cats: ['gis', 'dash', 'auto'],
+      id: 'land', title: 'Land Attributes Dashboard', featured: true, status: 'live', img: 'land.jpg', cats: ['gis', 'apps'],
       blurb: 'A parcel map and review tool covering every tax parcel in the county (about 17,500 parcels and 21,000 accounts). It flags missing attributes, parcels that don’t match their neighbors, and data-entry errors, then exports review lists. Uploading a new export triggers a GitHub Actions pipeline that cleans the data and republishes the site in about two minutes.',
       stack: ['MapLibre', 'JavaScript', 'Python', 'Pandas', 'GeoPandas', 'GitHub Actions'],
       live: PAGES + 'gunnison-land-attributes-demo/', repo: 'gunnison-land-attributes-demo', glyph: '17,500 parcels, one map'
     },
     {
-      id: 'str', title: 'Gunnison STR Monitor', featured: true, status: 'live', img: 'str.jpg', cats: ['gis', 'dash', 'auto'],
+      id: 'str', title: 'Gunnison STR Monitor', featured: true, status: 'live', img: 'str.jpg', cats: ['gis', 'apps'],
       blurb: 'A self-updating dashboard of short-term rentals in unincorporated Gunnison County, built ahead of the county\u2019s 2027 STR licensing program. Every Monday a GitHub Action searches about 300 map tiles across four date windows, filters out hotels, campsites and in-town listings, matches each listing to the nearest parcel with a confidence rating, and tracks new and delisted rentals week to week. You can filter, search by owner or address, and export to CSV.',
       stack: ['Python', 'GeoPandas', 'Web scraping', 'GitHub Actions', 'JavaScript'],
       live: PAGES + 'gunnison-str-dashboard/', repo: 'gunnison-str-dashboard', glyph: 'Every rental, matched to a parcel',
       demo: { label: 'Demo login', login: 'demo / gunnison-str-2026', note: '' }
     },
     {
-      id: 'bluemesa', title: 'Blue Mesa Water Report', featured: true, status: 'live', img: 'bluemesa.jpg', cats: ['dash', 'analysis', 'auto'],
+      id: 'bluemesa', title: 'Blue Mesa Water Report', featured: true, status: 'live', img: 'bluemesa.jpg', cats: ['dash'],
       blurb: 'How full is Colorado’s largest lake, and how much is the dam letting out? Built from every daily Bureau of Reclamation reading since 1968, it shows the reservoir hitting an all-time low in October 2026. Charts are titled as the questions they answer: has the lake ever been this low, how this year compares with all 58 others, and which years released the most and least water. One script re-downloads the data and rebuilds the page.',
       stack: ['Python', 'JavaScript', 'D3.js', 'Data viz'],
       live: PAGES + 'blue-mesa-water-report/', repo: 'blue-mesa-water-report', glyph: '58 years of lake levels'
     },
     {
-      id: 'audit', title: 'Assessor Website Audit', status: 'live', img: 'audit.jpg', cats: ['ai', 'analysis'],
+      id: 'audit', title: 'Assessor Website Audit', featured: true, status: 'live', img: 'audit.jpg', cats: ['dash'],
       blurb: 'Ran the same research prompt and scoring rubric through ChatGPT, Gemini, and Claude, compared 24 Colorado counties, and merged the three reviews into one ranked action plan. One model caught a new state deadline change the other two missed.',
       stack: ['Prompt engineering', 'OpenAI API', 'Claude API', 'Gemini'],
       live: PAGES + 'gunnison-assessor-audit/', repo: 'gunnison-assessor-audit', glyph: '3 models, 24 counties'
     },
     {
-      id: 'permit', title: 'Gunnison Permit Portal', status: 'code', img: 'permit.jpg', cats: ['apps'],
-      blurb: 'Public building-permit search plus a staff portal for four jurisdictions. Staff upload CSV or Excel exports from their existing systems, and the app learns each jurisdiction’s column layout and remembers it for next time. Includes JWT authentication, inspection tracking, and document attachments on AWS.',
-      stack: ['React', 'Tailwind', 'Node.js', 'PostgreSQL', 'Prisma', 'AWS', 'REST APIs'],
-      repo: 'gunnison-permit-portal', glyph: '4 jurisdictions, 1 search'
-    },
-    {
-      id: 'housing', title: 'Pre/Post-COVID Housing Snapshots', status: 'live', cats: ['analysis', 'dash'], img: 'housing.jpg',
+      id: 'housing', title: 'Pre/Post-COVID Housing Snapshots', status: 'live', cats: ['dash'], img: 'housing.jpg',
       blurb: 'Gunnison’s typical sale price went from $305K to $575K, and the share of U.S. households that could afford it fell from 42% to 14%.',
       stack: ['JavaScript', 'Data viz', 'Excel'],
       live: PAGES + 'gunnison-housing-snapshots/', repo: 'gunnison-housing-snapshots'
     },
     {
-      id: 'condition', title: 'Residential Condition Dashboard', status: 'live', cats: ['dash', 'analysis'], img: 'condition.jpg',
-      blurb: 'Condition, quality, and value of 10,885 principal residential structures across economic areas, representing over $9.4B in residential improvement value.',
-      stack: ['Plotly', 'JavaScript', 'Data viz'],
-      live: PAGES + 'gunnison-residential-condition/', repo: 'gunnison-residential-condition'
-    },
-    {
-      id: 'eye', title: 'Property Eye', featured: true, status: 'live', img: 'eye.jpg', cats: ['gis', 'ai', 'auto'],
+      id: 'eye', title: 'Property Eye', featured: true, status: 'live', img: 'eye.jpg', cats: ['ai', 'gis'],
       blurb: 'Satellite change detection across 20,201 tax parcels that flags likely new construction while ignoring change on neighboring lots. Checked against aerial photos, 6 of the 8 strongest flags were real. Reviewers swipe between dated aerial photos back to 2005.',
       stack: ['Python', 'FastAPI', 'Earth Engine', 'PostGIS', 'React', 'MapLibre', 'Docker'],
       live: 'https://64.23.133.119.sslip.io', repo: 'gunnison-property-eye', glyph: 'New construction, from orbit'
     },
     {
-      id: 'staticmap', title: 'Parcel Value Map', status: 'live', cats: ['gis'], img: 'staticmap.jpg',
-      blurb: 'A lightweight Leaflet map that joins assessment CSVs to parcel boundaries at 97% coverage, so appraisers can style parcels by view, condition, or value and spot gaps and outliers.',
-      stack: ['Leaflet', 'JavaScript', 'GeoJSON', 'ETL & QA'],
-      live: PAGES + 'gunnison_gis_mapping_static_demo/', repo: 'gunnison_gis_mapping_static_demo'
-    },
-    {
-      id: 'explorer', title: 'Gunnison County Map Explorer', status: 'code', cats: ['gis', 'apps'],
-      blurb: 'Turns legacy county shapefiles into a modern web map: PostGIS serves parcels, jurisdictions, and towns through a standards-based OGC API, and a React front end lets staff toggle layers, switch street, satellite, and terrain base maps, and fly between towns.',
-      stack: ['React', 'TypeScript', 'MapLibre', 'PostGIS', 'OGC APIs', 'Docker'],
-      repo: 'Gunnison-County-Map-Explorer', glyph: 'Shapefiles → OGC API → web map'
-    },
-    {
-      id: 'ownership', title: 'Who Owns Colorado?', featured: true, status: 'live', img: 'ownership.jpg', cats: ['gis', 'analysis'],
+      id: 'ownership', title: 'Who Owns Colorado?', featured: true, status: 'live', img: 'ownership.jpg', cats: ['gis'],
       blurb: 'Who owns the state? 62.6% of Colorado land is private, but in Gunnison County over 76% is public, and private parcels show growing out-of-county ownership.',
       stack: ['Python', 'GeoPandas', 'Pandas', 'PostGIS'],
       live: PAGES + 'colorado-land-ownership/', repo: 'colorado-land-ownership', glyph: 'Public vs. private land'
+    },
+    {
+      id: 'assessoryear', title: 'The Assessor’s Year', status: 'live', img: 'assessoryear.jpg', cats: ['dash'],
+      blurb: 'An unofficial interactive guide to Colorado’s two-year property tax cycle. Pick the year you pay your bill and it shows which home-sale date and which January 1 your bill is based on, then walks through each step from valuation to tax bill, with upcoming deadlines counted down automatically.',
+      stack: ['JavaScript', 'SVG'],
+      live: PAGES + 'gunnison-assessor-year/', repo: 'gunnison-assessor-year', glyph: 'Which year am I paying for?'
+    },
+
+    {
+      id: 'condition', title: 'Residential Condition Dashboard', status: 'live', cats: ['dash'], img: 'condition.jpg',
+      blurb: 'Condition, quality, and value of 10,885 principal residential structures across economic areas, representing over $9.4B in residential improvement value.',
+      stack: ['Plotly', 'JavaScript', 'Data viz'],
+      live: PAGES + 'gunnison-residential-condition/', repo: 'gunnison-residential-condition'
+    },
+    {
+      id: 'traffic', title: 'Repo Traffic Dashboard', status: 'live', cats: ['dash'], img: 'traffic.jpg',
+      blurb: 'GitHub keeps only 14 days of traffic per repository. A daily GitHub Action pulls views, visitors, clones and referrers for every public repo, plus visits to the live project sites, and builds up the full history in one dashboard. A weekly summary arrives by email every Monday.',
+      stack: ['Python', 'GitHub Actions', 'JavaScript', 'Data viz', 'REST APIs'],
+      live: PAGES + 'repo-traffic-dashboard/', repo: 'repo-traffic-dashboard'
     },
     {
       id: 'tax', title: 'Property Tax Calculator', status: 'live', img: 'tax.jpg', cats: ['apps'],
@@ -117,23 +118,23 @@
       live: PAGES + 'gunnison-county-property-tax-calculator/', repo: 'gunnison-county-property-tax-calculator', glyph: 'Value × rate × mills'
     },
     {
-      id: 'assessoryear', title: 'The Assessor’s Year', status: 'live', img: 'assessoryear.jpg', cats: ['apps', 'dash'],
-      blurb: 'An unofficial interactive guide to Colorado’s two-year property tax cycle. Pick the year you pay your bill and it shows which home-sale date and which January 1 your bill is based on, then walks through each step from valuation to tax bill, with upcoming deadlines counted down automatically.',
-      stack: ['JavaScript', 'SVG'],
-      live: PAGES + 'gunnison-assessor-year/', repo: 'gunnison-assessor-year', glyph: 'Which year am I paying for?'
+      id: 'permit', title: 'Gunnison Permit Portal', status: 'code', img: 'permit.jpg', cats: ['apps'],
+      blurb: 'Public building-permit search plus a staff portal for four jurisdictions. Staff upload CSV or Excel exports from their existing systems, and the app learns each jurisdiction’s column layout and remembers it for next time. Includes JWT authentication, inspection tracking, and document attachments on AWS.',
+      stack: ['React', 'Tailwind', 'Node.js', 'PostgreSQL', 'Prisma', 'AWS', 'REST APIs'],
+      repo: 'gunnison-permit-portal', glyph: '4 jurisdictions, 1 search'
     },
     {
-      id: 'airport', title: 'Gunnison Airport Tracker', status: 'code', cats: ['apps', 'auto'],
+      id: 'airport', title: 'Gunnison Airport Tracker', status: 'code', img: 'airport.jpg', cats: ['apps', 'dash'],
       blurb: 'An automated flight tracker for KGUC that pulls OpenSky REST API data every hour, logs repeat private aircraft to PostgreSQL, and was deployed on Heroku.',
       stack: ['Node.js', 'PostgreSQL', 'REST APIs'],
       repo: 'gunnison-airport-tracker', glyph: 'KGUC, in real time'
     },
     {
-      id: 'acs', title: 'U.S. Demographics in SQL', status: 'live', cats: ['analysis'],
-      blurb: 'Ranked every U.S. state on poverty, income, unemployment, education, and rent burden from 2019 Census data using CTEs and window functions, then built an interactive Looker Studio dashboard.',
-      stack: ['SQL', 'BigQuery', 'Looker Studio'],
-      live: 'https://datastudio.google.com/s/uXnrNlgCZN0', repo: 'us-state-demographics-sql-acs2019', glyph: 'ACS 2019 × SQL'
-    }
+      id: 'lottery', title: 'Lottery Frequency Dashboard', status: 'live', img: 'lottery.jpg', cats: ['dash'],
+      blurb: 'Reads the full Powerball and Millionaire for Life drawing histories (2,879 Powerball drawings), weights every number by how often it has come up, and shows the most frequent picks. It is a look at the historical data, not a forecast: it does not change the odds of a fair drawing.',
+      stack: ['Python', 'Streamlit', 'Pandas', 'JavaScript', 'Data viz'],
+      live: PAGES + 'lottery-project/', repo: 'lottery-project'
+    },
   ];
 
   const SKILLS = [
@@ -146,6 +147,14 @@
   ];
   // Skills that live under a broader stack label on project cards.
   const ALIAS = { SQL: ['SQL', 'PostgreSQL', 'PostGIS'] };
+
+  // Card order in every tab (a project shows in each tab listed in its cats).
+  const ORDER = ['covid', 'photo', 'eye', 'assessor-map', 'land', 'str', 'fieldguide', 'bluemesa', 'ownership',
+                 'audit', 'llm', 'gitguide', 'assessoryear', 'tax', 'permit', 'airport', 'building', 'housing',
+                 'condition', 'traffic', 'lottery'];
+  const BY_ID = Object.fromEntries(PROJECTS.map((p) => [p.id, p]));
+  const ORDERED = ORDER.map((id) => BY_ID[id]);
+  const TAG_LIMIT = 4;
 
   const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const $ = (s, el = document) => el.querySelector(s);
@@ -218,64 +227,99 @@
     return { min, max };
   }
 
-  /* ---------- hero terrain ---------- */
+  /* ---------- hero flow field ---------- */
+  // Particles stream along a slowly changing noise field, like wind or river current.
+  // The cursor stirs an eddy; lines are fainter behind the intro text so it stays readable.
   function hero() {
     const canvas = $('#topo');
     const ctx = canvas.getContext('2d');
     const noise = makeNoise(7703);
-    const ro = { lat: $('#ro-lat'), lon: $('#ro-lon'), elev: $('#ro-elev') };
-    let w, h, dpr, t = 0, visible = true, raf = 0;
+    const ro = { lat: $('#ro-lat'), lon: $('#ro-lon'), flow: $('#ro-elev') };
+    const text = $('.hero-inner');
+    let w, h, dpr, t = 0, visible = true, raf = 0, parts = [], quiet = null, colors = {};
     const mouse = { x: -9999, y: -9999, tx: -9999, ty: -9999, amp: 0, tamp: 0 };
+    const DIRS = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'];
 
-    const field = (x, y) => {
-      const s = 1 / 340;
-      let v = noise(x * s + t, y * s - t * 0.6);
-      const dx = x - mouse.x, dy = y - mouse.y;
-      v += mouse.amp * Math.exp(-(dx * dx + dy * dy) / (2 * 120 * 120));
-      return v;
+    const angleAt = (x, y) => {
+      let a = noise(x / 260, y / 260 + t * 2) * Math.PI * 4;
+      const dx = x - mouse.x, dy = y - mouse.y, d2 = dx * dx + dy * dy;
+      if (mouse.amp > 0.02 && d2 < 160 * 160) a += (Math.atan2(dy, dx) + Math.PI / 2 - a) * (1 - Math.sqrt(d2) / 160) * 0.9 * (mouse.amp / 0.38);
+      return a;
     };
+    const spawn = (p) => {
+      p.x = Math.random() * w; p.y = Math.random() * h; p.age = 0;
+      p.life = 120 + Math.random() * 160; p.amber = Math.random() < 0.08;
+      return p;
+    };
+    const readColors = () => { colors = { topo: css('--topo'), amber: css('--topo-index') }; };
     const resize = () => {
       dpr = Math.min(devicePixelRatio || 1, 2);
       w = canvas.clientWidth; h = canvas.clientHeight;
       canvas.width = w * dpr; canvas.height = h * dpr;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      const count = Math.min(4000, Math.round(w * h / (w < 700 ? 900 : 320)));
+      parts = Array.from({ length: count }, () => spawn({}));
+      const c = canvas.getBoundingClientRect(), r = text.getBoundingClientRect();
+      quiet = { x0: r.left - c.left - 24, y0: r.top - c.top - 24, x1: r.right - c.left + 24, y1: r.bottom - c.top + 24 };
+      readColors();
+      ctx.clearRect(0, 0, w, h);
     };
-    const draw = () => {
-      drawContours(ctx, w, h, field, {
-        cell: w < 700 ? 12 : 9, levels: 26, range: [0.05, 1.45], color: css('--topo'), index: css('--topo-index'), lw: 1, alpha: 0.32
-      });
+    const step = (fade) => {
+      if (fade) {
+        ctx.globalCompositeOperation = 'destination-out';
+        ctx.fillStyle = 'rgba(0,0,0,0.06)'; ctx.fillRect(0, 0, w, h);
+        ctx.globalCompositeOperation = 'source-over';
+      }
+      ctx.lineWidth = 1.1;
+      const q = quiet, normal = `rgba(${colors.topo},0.4)`, soft = `rgba(${colors.topo},0.16)`;
+      const amber = `rgba(${colors.amber},0.55)`, amberSoft = `rgba(${colors.amber},0.22)`;
+      for (const p of parts) {
+        const a = angleAt(p.x, p.y);
+        const nx = p.x + Math.cos(a) * 1.6, ny = p.y + Math.sin(a) * 1.6;
+        const behindText = q && p.x > q.x0 && p.x < q.x1 && p.y > q.y0 && p.y < q.y1;
+        ctx.strokeStyle = p.amber ? (behindText ? amberSoft : amber) : (behindText ? soft : normal);
+        ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(nx, ny); ctx.stroke();
+        p.x = nx; p.y = ny;
+        if (++p.age > p.life || p.x < 0 || p.x > w || p.y < 0 || p.y > h) spawn(p);
+      }
+    };
+    // Still image for reduced motion: trace short streamlines once, no animation.
+    const still = () => {
+      ctx.clearRect(0, 0, w, h);
+      for (let i = 0; i < 60; i++) step(false);
     };
     const frame = () => {
       mouse.x += (mouse.tx - mouse.x) * 0.12;
       mouse.y += (mouse.ty - mouse.y) * 0.12;
       mouse.amp += (mouse.tamp - mouse.amp) * 0.06;
-      if (!reduceMotion) t += 0.0009;
-      draw();
-      raf = visible && !reduceMotion ? requestAnimationFrame(frame) : 0;
+      t += 0.0009;
+      step(true);
+      raf = visible && !document.hidden ? requestAnimationFrame(frame) : 0;
     };
-    const kick = () => { if (!raf) raf = requestAnimationFrame(frame); };
+    const kick = () => { if (!reduceMotion && !raf) raf = requestAnimationFrame(frame); };
 
-    const hero = canvas.parentElement;
-    hero.addEventListener('pointermove', (e) => {
+    const heroEl = canvas.parentElement;
+    heroEl.addEventListener('pointermove', (e) => {
       const r = canvas.getBoundingClientRect();
       mouse.tx = e.clientX - r.left; mouse.ty = e.clientY - r.top; mouse.tamp = 0.38;
       if (mouse.x < -999) { mouse.x = mouse.tx; mouse.y = mouse.ty; }
       // Map the hero onto a ~0.3° box centered on Gunnison.
       const lat = 38.5458 + (0.5 - mouse.ty / h) * 0.3;
       const lon = 106.9253 - (mouse.tx / w - 0.5) * 0.5;
-      const v = field(mouse.tx, mouse.ty);
-      const elev = 7700 + Math.max(0, (v - 0.1) / 0.9) * 4600;
+      const deg = Math.round(((angleAt(mouse.tx, mouse.ty) * 180 / Math.PI + 90) % 360 + 360) % 360);
       ro.lat.textContent = lat.toFixed(4) + '° N';
       ro.lon.textContent = lon.toFixed(4) + '° W';
-      ro.elev.textContent = Math.round(elev).toLocaleString() + ' ft';
-      if (reduceMotion) { mouse.x = mouse.tx; mouse.y = mouse.ty; mouse.amp = 0.38; draw(); }
+      ro.flow.textContent = deg + '° ' + DIRS[Math.round(deg / 45) % 8];
     });
-    hero.addEventListener('pointerleave', () => { mouse.tamp = 0; kick(); });
+    heroEl.addEventListener('pointerleave', () => { mouse.tamp = 0; });
 
     new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible) kick(); }).observe(canvas);
-    addEventListener('resize', () => { resize(); draw(); });
-    resize(); draw(); kick();
-    return draw;
+    document.addEventListener('visibilitychange', () => { if (!document.hidden) kick(); });
+    addEventListener('resize', () => { resize(); if (reduceMotion) still(); });
+    resize();
+    if (reduceMotion) still(); else kick();
+    // Called after a theme switch: pick up the new colors and start fresh.
+    return () => { readColors(); ctx.clearRect(0, 0, w, h); if (reduceMotion) still(); };
   }
 
   /* ---------- project cards ---------- */
@@ -283,8 +327,8 @@
 
   function renderCards() {
     const grid = $('#grid');
-    grid.innerHTML = PROJECTS.map((p) => `
-      <article class="card reveal${p.featured ? ' featured' : ''}" data-id="${p.id}">
+    const card = (p) => `
+      <article class="card reveal" data-id="${p.id}">
         <div class="thumb">
           ${p.img ? `<img src="img/${p.img}" alt="Screenshot of ${p.title}" loading="lazy">`
                   : `<canvas data-seed="${p.id}" aria-hidden="true"></canvas><div class="glyph"><span>${p.glyph}</span></div>`}
@@ -293,7 +337,8 @@
         <div class="body">
           <h3>${p.title}</h3>
           <p>${p.blurb}</p>
-          <div class="stack">${p.stack.map((s) => `<span data-skill="${s}">${s}</span>`).join('')}</div>
+          <div class="stack">${p.stack.map((s, i) => `<span data-skill="${s}"${i >= TAG_LIMIT ? ' class="extra"' : ''}>${s}</span>`).join('')}${
+            p.stack.length > TAG_LIMIT ? `<em class="more">+${p.stack.length - TAG_LIMIT}</em>` : ''}</div>
           ${p.demo ? `<p class="demo-note mono">${p.demo.label || 'Admin demo login'}: <b>${p.demo.login}</b>${p.demo.note === undefined ? ' · resets nightly, so explore freely' : p.demo.note}</p>` : ''}
           <div class="card-links">
             ${p.live ? `<a href="${p.live}" target="_blank" rel="noopener">Open live ↗</a>` : ''}
@@ -301,7 +346,8 @@
             <a href="${GH + p.repo}" target="_blank" rel="noopener">Code ↗</a>
           </div>
         </div>
-      </article>`).join('');
+      </article>`;
+    grid.innerHTML = ORDERED.map(card).join('');
     paintThumbs();
     if (!reduceMotion && matchMedia('(hover: hover)').matches) $$('.card', grid).forEach(tilt);
   }
@@ -329,11 +375,51 @@
   }
 
   /* ---------- filtering ---------- */
-  let state = { cat: 'all', skill: null };
+  // cat: a tab ('ai', 'gis', 'apps', 'dash'), 'live' (from the hero stat), or 'all' (only while a skill filter is on)
+  let state = { cat: 'ai', skill: null };
   const matchesSkill = (p, s) => p.stack.some((x) => (ALIAS[s] || [s]).includes(x));
+
+  // Filtered views: mix big (2-column) and small cards so every row is full.
+  // 3 columns: rows are big+small or small×3. 2 columns: big alone or small×2.
+  function pack() {
+    const grid = $('#grid');
+    const cards = ORDERED.map((p) => ({ p, el: $(`.card[data-id="${p.id}"]`) }));
+    const cols = getComputedStyle(grid).gridTemplateColumns.split(' ').length;
+    const shown = cards.filter(({ el }) => !el.classList.contains('hidden'));
+    const n = shown.length;
+    const cand = shown.filter(({ p }) => p.featured);
+    const fits = (f) => cols === 3 ? f <= n - f && (n - 2 * f) % 3 === 0
+                      : cols === 2 ? (n - f) % 2 === 0 : f === 0;
+    let f = cols === 1 ? 0 : cand.length;
+    while (f > 0 && !fits(f)) f--;
+    const bigs = new Set(cand.slice(0, f).map(({ p }) => p.id));
+    cards.forEach(({ p, el }) => el.classList.toggle('big', bigs.has(p.id)));
+
+    // Build the rows in reading order, alternating which side the big card sits on.
+    const queue = shown.slice();
+    const isBig = (c) => bigs.has(c.p.id);
+    const take = (pred) => { const i = queue.findIndex(pred); return i < 0 ? null : queue.splice(i, 1)[0]; };
+    let smallRows = cols === 3 ? (n - 2 * f) / 3 : 0;
+    let order = 0, row = 0;
+    const place = (...cs) => cs.forEach((c) => { if (c) c.el.style.order = order++; });
+    while (queue.length) {
+      const first = queue.shift();
+      if (cols !== 3) { place(first, isBig(first) ? null : take((c) => !isBig(c))); continue; }
+      if (isBig(first) || !smallRows) {
+        const big = isBig(first) ? first : take(isBig);
+        const small = isBig(first) ? take((c) => !isBig(c)) : first;
+        row % 2 ? place(small, big) : place(big, small);
+      } else {
+        place(first, take((c) => !isBig(c)), take((c) => !isBig(c)));
+        smallRows--;
+      }
+      row++;
+    }
+  }
 
   function applyFilter() {
     const note = $('#filter-note');
+    const grid = $('#grid');
     let shown = 0;
     PROJECTS.forEach((p) => {
       const card = $(`.card[data-id="${p.id}"]`);
@@ -352,6 +438,7 @@
       : '';
     const clear = $('#clear-skill');
     if (clear) clear.onclick = () => { state.skill = null; applyFilter(); };
+    pack();
   }
 
   function renderSkills() {
@@ -398,13 +485,28 @@
 
   function init() {
     renderCards();
+    applyFilter();
     renderSkills();
     const live = $('#live-count'); if (live) live.dataset.count = PROJECTS.filter((p) => p.status === 'live').length;
     $$('.section-head, .timeline > li, .license, .contact > *').forEach((el) => el.classList.add('reveal'));
     observe();
     const redrawHero = hero();
 
-    $$('.chip').forEach((c) => c.addEventListener('click', () => { state.cat = c.dataset.cat; applyFilter(); }));
+    // Tab counts, e.g. "AI 5"
+    $$('.chip').forEach((c) => {
+      const n = PROJECTS.filter((p) => c.dataset.cat === 'live' ? p.status === 'live' : p.cats.includes(c.dataset.cat)).length;
+      c.insertAdjacentHTML('beforeend', `<span class="n">${n}</span>`);
+    });
+    $$('.chip').forEach((c) => c.addEventListener('click', () => {
+      state.cat = c.dataset.cat; applyFilter();
+      // If the tab bar is pinned mid-list, jump back to the top of the cards.
+      // (Measure from the grid: while pinned, the bar's own position is its stuck spot, not its place in the page.)
+      const bar = $('.filters'), gridTop = $('#grid').getBoundingClientRect().top;
+      const headroom = 60 + bar.offsetHeight + 24;
+      if (gridTop < headroom) {
+        scrollTo({ top: gridTop + scrollY - headroom, behavior: reduceMotion ? 'auto' : 'smooth' });
+      }
+    }));
     $$('[data-filter]').forEach((el) => el.addEventListener('click', () => { state.skill = null; state.cat = el.dataset.filter; applyFilter(); }));
     $('#skills-list').addEventListener('click', (e) => {
       const b = e.target.closest('button.skill'); if (!b) return;
@@ -435,7 +537,7 @@
     });
     $('#year').textContent = new Date().getFullYear();
 
-    let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(paintThumbs, 200); });
+    let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { pack(); paintThumbs(); }, 200); });
   }
 
   init();
