@@ -13,7 +13,7 @@
       live: 'https://huggingface.co/spaces/Eesterlein/covid-trials-ai', repo: 'covid-trials-ai', glyph: '10,269 trials, every claim cited'
     },
     {
-      id: 'assessor-map', title: 'Assessor Map Platform', featured: true, status: 'live', img: 'assessormap.jpg', cats: ['gis', 'apps'],
+      id: 'assessor-map', title: 'Assessor Map Platform', featured: true, status: 'live', daily: 'Staff build their own maps, no GIS software', img: 'assessormap.jpg', cats: ['gis', 'apps'],
       blurb: 'A production GIS platform where non-technical staff configure maps, upload shapefiles, and create “virtual layers” that join any Excel or CSV dataset to parcels by account number, with no GIS software needed. Includes live NASA FIRMS wildfire detections every 30 minutes, deployed with Docker, nginx, firewall hardening, and daily backups.',
       stack: ['React', 'TypeScript', 'Node.js', 'MapLibre', 'PostGIS', 'GDAL', 'OGC APIs', 'Docker', 'nginx'],
       live: 'http://165.232.147.15', repo: 'assessor-map', glyph: 'Parcels + live wildfire layers',
@@ -26,7 +26,7 @@
       live: PAGES + 'gunnison-building-stock/', repo: 'gunnison-building-stock'
     },
     {
-      id: 'photo', title: 'Appraiser Photo Processor', featured: true, status: 'code', img: 'photo.jpg', cats: ['ai', 'apps'],
+      id: 'photo', title: 'Appraiser Photo Processor', featured: true, status: 'code', daily: 'Replaced manual photo sorting · ~$0.002 a photo', img: 'photo.jpg', cats: ['ai', 'apps'],
       blurb: 'Multimodal AI used in daily work. The app reads each field photo’s GPS and compass data, matches it to the nearest parcel, classifies the shot with Claude Vision, and renames it to the office’s standard. It replaced a manual sorting step for appraisers at about $0.002 per photo and runs on staff Windows machines.',
       stack: ['Python', 'Claude API', 'Vision AI', 'CLIP', 'Prompt engineering', 'PyInstaller'],
       repo: 'Appraiser-Photo-Processor', glyph: 'GPS + vision AI → filed photos'
@@ -50,15 +50,15 @@
       repo: 'Building-Local-LLMs-for-Private-Workflows', glyph: 'Ask your documents'
     },
     {
-      id: 'land', title: 'Land Attributes Dashboard', featured: true, status: 'live', img: 'land.jpg', cats: ['gis', 'apps'],
+      id: 'land', title: 'Land Attributes Dashboard', featured: true, status: 'live', daily: 'Republishes ~2 min after each export · staff use the internal edition; this is the public-data demo', img: 'land.jpg', cats: ['gis', 'apps'],
       blurb: 'A parcel map and review tool covering every tax parcel in the county (about 17,500 parcels and 21,000 accounts). It flags missing attributes, parcels that don’t match their neighbors, and data-entry errors, then exports review lists. Uploading a new export triggers a GitHub Actions pipeline that cleans the data and republishes the site in about two minutes.',
-      stack: ['MapLibre', 'JavaScript', 'Python', 'Pandas', 'GeoPandas', 'GitHub Actions'],
+      stack: ['MapLibre', 'JavaScript', 'Python', 'Pandas', 'GeoPandas', 'GeoJSON', 'GitHub Actions'],
       live: PAGES + 'gunnison-land-attributes-demo/', repo: 'gunnison-land-attributes-demo', glyph: '17,500 parcels, one map'
     },
     {
-      id: 'str', title: 'Gunnison STR Monitor', featured: true, status: 'live', img: 'str.jpg', cats: ['gis', 'apps'],
+      id: 'str', title: 'Gunnison STR Monitor', featured: true, status: 'live', daily: 'Updates itself every Monday · staff use an internal edition', img: 'str.jpg', cats: ['gis', 'apps'],
       blurb: 'A self-updating dashboard of short-term rentals in unincorporated Gunnison County, built ahead of the county\u2019s 2027 STR licensing program. Every Monday a GitHub Action searches about 300 map tiles across four date windows, filters out hotels, campsites and in-town listings, matches each listing to the nearest parcel with a confidence rating, and tracks new and delisted rentals week to week. You can filter, search by owner or address, and export to CSV.',
-      stack: ['Python', 'GeoPandas', 'Web scraping', 'GitHub Actions', 'JavaScript'],
+      stack: ['Python', 'GeoPandas', 'Web scraping', 'GitHub Actions', 'Leaflet', 'GeoJSON', 'JavaScript'],
       live: PAGES + 'gunnison-str-dashboard/', repo: 'gunnison-str-dashboard', glyph: 'Every rental, matched to a parcel',
       demo: { label: 'Demo login', login: 'demo / gunnison-str-2026', note: '' }
     },
@@ -125,33 +125,31 @@
     },
     {
       id: 'airport', title: 'Gunnison Airport Tracker', status: 'code', img: 'airport.jpg', cats: ['apps', 'dash'],
-      blurb: 'An automated flight tracker for KGUC that pulls OpenSky REST API data every hour, logs repeat private aircraft to PostgreSQL, and was deployed on Heroku.',
+      blurb: 'A scheduled data pipeline for Gunnison–Crested Butte Regional Airport (KGUC). It pulled live OpenSky REST API data, sorted flights into commercial, private and military by callsign, worked out landing status from altitude and vertical rate, and stored results in PostgreSQL on Heroku. Retired when API limits and hosting costs outgrew a hobby project; the code is still available.',
       stack: ['Node.js', 'PostgreSQL', 'REST APIs'],
-      repo: 'gunnison-airport-tracker', glyph: 'KGUC, in real time'
-    },
-    {
-      id: 'lottery', title: 'Lottery Frequency Dashboard', status: 'live', img: 'lottery.jpg', cats: ['dash'],
-      blurb: 'Reads the full Powerball and Millionaire for Life drawing histories (2,879 Powerball drawings), weights every number by how often it has come up, and shows the most frequent picks. It is a look at the historical data, not a forecast: it does not change the odds of a fair drawing.',
-      stack: ['Python', 'Streamlit', 'Pandas', 'JavaScript', 'Data viz'],
-      live: PAGES + 'lottery-project/', repo: 'lottery-project'
+      repo: 'gunnison-airport-tracker', glyph: 'Scheduled API ingestion'
     },
   ];
 
   const SKILLS = [
-    { group: 'Data & analysis', items: ['SQL', 'SQL Server', 'PostgreSQL', 'BigQuery', 'Access', 'Python', 'Pandas', 'R', 'SAS', 'Excel', 'ETL & QA'] },
+    { group: 'Data & analysis', items: ['SQL', 'SQL Server', 'PostgreSQL', 'BigQuery', 'Access', 'Python', 'Pandas', 'Excel', 'ETL & QA'] },
     { group: 'GIS & spatial', items: ['PostGIS', 'MapLibre', 'Leaflet', 'GDAL', 'GeoPandas', 'OGC APIs', 'Earth Engine', 'GeoJSON'] },
     { group: 'Visualization', items: ['Data viz', 'Tableau', 'Power BI', 'Looker Studio', 'Plotly', 'SVG'] },
     { group: 'Development', items: ['JavaScript', 'TypeScript', 'React', 'Node.js', 'FastAPI', 'REST APIs', 'Docker', 'nginx', 'AWS'] },
     { group: 'AI & automation', items: ['Claude API', 'OpenAI API', 'Gemini', 'Vision AI', 'CLIP', 'RAG', 'Vector indexing', 'Prompt engineering', 'LlamaIndex', 'Ollama', 'GitHub Actions'] },
     { group: 'Assessment', items: ['Mass appraisal', 'Ad valorem assessment', 'Certification of value', 'Sales analysis', 'USPAP'] }
   ];
+  // Skills backed by my job or coursework rather than a public project: shown with a "work" tag.
+  const AT_WORK = new Set(['SQL Server', 'Access', 'BigQuery', 'ETL & QA', 'Power BI', 'Looker Studio',
+    'Mass appraisal', 'Ad valorem assessment', 'Certification of value', 'Sales analysis', 'USPAP']);
   // Skills that live under a broader stack label on project cards.
   const ALIAS = { SQL: ['SQL', 'PostgreSQL', 'PostGIS'] };
 
   // Card order in every tab (a project shows in each tab listed in its cats).
-  const ORDER = ['covid', 'photo', 'eye', 'assessor-map', 'land', 'str', 'fieldguide', 'bluemesa', 'ownership',
+  // Apps in daily office use come first, then the rest.
+  const ORDER = ['photo', 'assessor-map', 'land', 'str', 'covid', 'eye', 'fieldguide', 'bluemesa', 'ownership',
                  'audit', 'llm', 'gitguide', 'assessoryear', 'tax', 'permit', 'airport', 'building', 'housing',
-                 'condition', 'traffic', 'lottery'];
+                 'condition', 'traffic'];
   const BY_ID = Object.fromEntries(PROJECTS.map((p) => [p.id, p]));
   const ORDERED = ORDER.map((id) => BY_ID[id]);
   const TAG_LIMIT = 4;
@@ -335,6 +333,7 @@
           <span class="badge ${p.status}"><i></i>${STATUS[p.status]}</span>
         </div>
         <div class="body">
+          ${p.daily ? `<p class="daily mono"><b>Used daily by staff</b> ${p.daily}</p>` : ''}
           <h3>${p.title}</h3>
           <p>${p.blurb}</p>
           <div class="stack">${p.stack.map((s, i) => `<span data-skill="${s}"${i >= TAG_LIMIT ? ' class="extra"' : ''}>${s}</span>`).join('')}${
@@ -423,7 +422,7 @@
     let shown = 0;
     PROJECTS.forEach((p) => {
       const card = $(`.card[data-id="${p.id}"]`);
-      const inCat = state.cat === 'all' || (state.cat === 'live' ? p.status === 'live' : p.cats.includes(state.cat));
+      const inCat = state.cat === 'all' || (state.cat === 'live' ? p.status === 'live' : state.cat === 'staff' ? !!p.daily : p.cats.includes(state.cat));
       const inSkill = !state.skill || matchesSkill(p, state.skill);
       card.classList.toggle('hidden', !inCat);
       if (inCat && state.cat !== 'all') card.classList.add('in');
@@ -447,8 +446,10 @@
         <h3>${g.group}</h3>
         <div>${g.items.map((s) => {
           const n = PROJECTS.filter((p) => matchesSkill(p, s)).length;
-          return n ? `<button class="skill" data-skill="${s}" title="Show ${n} project${n === 1 ? '' : 's'} using ${s}">${s}<sup>${n}</sup></button>`
-                   : `<span class="skill">${s}</span>`;
+          const tag = AT_WORK.has(s) ? '<i class="at-work">work</i>' : '';
+          if (s === 'Tableau') return `<a class="skill" href="https://public.tableau.com/app/profile/elissa.esterlein/vizzes" target="_blank" rel="noopener" title="15 dashboards on Tableau Public">${s} ↗</a>`;
+          return n ? `<button class="skill" data-skill="${s}" title="Show the projects that use ${s}">${s}${tag}</button>`
+                   : `<span class="skill">${s}${tag}</span>`;
         }).join('')}</div>
       </div>`).join('');
   }
@@ -488,6 +489,7 @@
     applyFilter();
     renderSkills();
     const live = $('#live-count'); if (live) live.dataset.count = PROJECTS.filter((p) => p.status === 'live').length;
+    const staff = $('#staff-count'); if (staff) staff.dataset.count = PROJECTS.filter((p) => p.daily).length;
     $$('.section-head, .timeline > li, .license, .contact > *').forEach((el) => el.classList.add('reveal'));
     observe();
     const redrawHero = hero();
@@ -527,7 +529,6 @@
       try { localStorage.setItem('theme', root.dataset.theme); } catch (e) {}
       redrawHero(); paintThumbs();
     });
-    $('#print-btn').addEventListener('click', () => print());
 
     const copy = $('#copy-email');
     copy.addEventListener('click', async () => {
