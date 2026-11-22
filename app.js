@@ -19,8 +19,8 @@
       live: 'https://huggingface.co/spaces/Eesterlein/covid-trials-ai', repo: 'covid-trials-ai', glyph: '10,269 trials, every claim cited'
     },
     {
-      id: 'assessor-map', title: 'Assessor Map Platform', featured: true, status: 'live', daily: 'Staff build their own maps, no GIS software', img: 'assessormap.jpg', cats: ['gis', 'apps'],
-      blurb: 'A production GIS platform where non-technical staff configure maps, upload shapefiles, and create “virtual layers” that join any Excel or CSV dataset to parcels by account number, with no GIS software needed. Includes live NASA FIRMS wildfire detections every 30 minutes, deployed with Docker, nginx, firewall hardening, and daily backups.',
+      id: 'assessor-map', title: 'Assessor Map Platform', featured: true, status: 'live', demoTag: 'Public demo built on public data · not an official county system', img: 'assessormap.jpg', cats: ['gis', 'apps'],
+      blurb: 'A full-stack GIS platform where non-technical users configure maps, upload shapefiles, and create “virtual layers” that join any Excel or CSV dataset to parcels by account number, with no GIS software needed. Includes live NASA FIRMS wildfire detections every 30 minutes, deployed with Docker, nginx, firewall hardening, and daily backups.',
       stack: ['React', 'TypeScript', 'Node.js', 'MapLibre', 'PostGIS', 'GDAL', 'OGC APIs', 'Docker', 'nginx'],
       live: 'http://165.232.147.15', repo: 'assessor-map', glyph: 'Parcels + live wildfire layers',
       demo: { url: 'http://165.232.147.15/admin/', login: 'demo / gunnison-demo' }
@@ -62,11 +62,10 @@
       live: PAGES + 'gunnison-land-attributes-demo/', repo: 'gunnison-land-attributes-demo', glyph: '17,500 parcels, one map'
     },
     {
-      id: 'str', title: 'Gunnison STR Monitor', featured: true, status: 'live', daily: 'Updates itself every Monday · staff use an internal edition', img: 'str.jpg', cats: ['gis', 'apps'],
-      blurb: 'A self-updating dashboard of short-term rentals in unincorporated Gunnison County, built ahead of the county\u2019s 2027 STR licensing program. Every Monday a GitHub Action searches about 300 map tiles across four date windows, filters out hotels, campsites and in-town listings, matches each listing to the nearest parcel with a confidence rating, and tracks new and delisted rentals week to week. You can filter, search by owner or address, and export to CSV.',
+      id: 'str', title: 'Gunnison STR Monitor', featured: true, status: 'private', daily: 'Updates itself every Monday · staff use an internal edition', img: 'str.jpg', cats: ['gis', 'apps'],
+      blurb: 'A self-updating dashboard of short-term rentals in unincorporated Gunnison County, built ahead of the county\u2019s 2027 STR licensing program. Every Monday a GitHub Action searches about 300 map tiles across four date windows, filters out hotels, campsites and in-town listings, matches each listing to the nearest parcel with a confidence rating, and tracks new and delisted rentals week to week. The code and data are private: each source is public, but a list matching owners to rentals is not something to publish.',
       stack: ['Python', 'GeoPandas', 'Web scraping', 'GitHub Actions', 'Leaflet', 'GeoJSON', 'JavaScript'],
-      live: PAGES + 'gunnison-str-dashboard/', repo: 'gunnison-str-dashboard', glyph: 'Every rental, matched to a parcel',
-      demo: { label: 'Demo login', login: 'demo / gunnison-str-2026', note: '' }
+      glyph: 'Every rental, matched to a parcel'
     },
     {
       id: 'bluemesa', title: 'Blue Mesa Water Report', featured: true, status: 'live', img: 'bluemesa.jpg', cats: ['dash'],
@@ -124,7 +123,7 @@
       live: PAGES + 'gunnison-county-property-tax-calculator/', repo: 'gunnison-county-property-tax-calculator', glyph: 'Value × rate × mills'
     },
     {
-      id: 'permit', title: 'Gunnison Permit Portal', status: 'code', img: 'permit.jpg', cats: ['apps'],
+      id: 'permit', title: 'Gunnison Permit Portal', status: 'code', demoTag: 'Not in use · offline to save hosting costs', img: 'permit.jpg', cats: ['apps'],
       blurb: 'Public building-permit search plus a staff portal for four jurisdictions. Staff upload CSV or Excel exports from their existing systems, and the app learns each jurisdiction’s column layout and remembers it for next time. Includes JWT authentication, inspection tracking, and document attachments on AWS.',
       stack: ['React', 'Tailwind', 'Node.js', 'PostgreSQL', 'Prisma', 'AWS', 'REST APIs'],
       repo: 'gunnison-permit-portal', glyph: '4 jurisdictions, 1 search'
@@ -153,7 +152,7 @@
 
   // Card order in every tab (a project shows in each tab listed in its cats).
   // Apps in daily office use come first, then the rest.
-  const ORDER = ['photo', 'assessor-map', 'land', 'str', 'covid', 'eye', 'fieldguide', 'flowers', 'bluemesa', 'ownership',
+  const ORDER = ['photo', 'land', 'str', 'assessor-map', 'covid', 'eye', 'fieldguide', 'flowers', 'bluemesa', 'ownership',
                  'audit', 'llm', 'gitguide', 'assessoryear', 'tax', 'permit', 'airport', 'building', 'housing',
                  'condition', 'traffic'];
   const BY_ID = Object.fromEntries(PROJECTS.map((p) => [p.id, p]));
@@ -327,7 +326,7 @@
   }
 
   /* ---------- project cards ---------- */
-  const STATUS = { live: 'Live', code: 'Code', dev: 'In development' };
+  const STATUS = { live: 'Live', code: 'Code', dev: 'In development', private: 'Private' };
 
   function renderCards() {
     const grid = $('#grid');
@@ -340,6 +339,7 @@
         </div>
         <div class="body">
           ${p.daily ? `<p class="daily mono"><b>Used daily by staff</b> ${p.daily}</p>` : ''}
+          ${p.demoTag ? `<p class="daily mono"><b>Demo</b> ${p.demoTag}</p>` : ''}
           <h3>${p.title}</h3>
           <p>${p.blurb}</p>
           <div class="stack">${p.stack.map((s, i) => `<span data-skill="${s}"${i >= TAG_LIMIT ? ' class="extra"' : ''}>${s}</span>`).join('')}${
@@ -348,7 +348,7 @@
           <div class="card-links">
             ${p.live ? `<a href="${p.live}" target="_blank" rel="noopener">Open live ↗</a>` : ''}
             ${p.demo && p.demo.url ? `<a href="${p.demo.url}" target="_blank" rel="noopener">Try the admin ↗</a>` : ''}
-            <a href="${GH + p.repo}" target="_blank" rel="noopener">Code ↗</a>
+            ${p.repo ? `<a href="${GH + p.repo}" target="_blank" rel="noopener">Code ↗</a>` : '<span class="private-note mono">Code and data private</span>'}
           </div>
         </div>
       </article>`;
