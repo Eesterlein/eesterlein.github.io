@@ -7,6 +7,12 @@
   // status: live | code | dev. img: screenshot in /img, otherwise a generated contour map.
   const PROJECTS = [
     {
+      id: 'flowers', title: 'Gunnison Flower Atlas', featured: true, status: 'live', img: 'flowers.jpg', cats: ['dash'],
+      blurb: 'Explore 140 Gunnison County wildflowers through a photo knowledge graph built from 35,056 iNaturalist observations. Follow 340 shared-area connections, filter by plant community or flower color, and select a species to see its seasonal observation pattern and approximate observation map. Connections show species recorded in the same 1-km areas, not proven ecological interactions.',
+      stack: ['JavaScript', 'D3.js', 'Leaflet', 'SVG', 'Data viz'],
+      live: PAGES + 'gunnison-flower-atlas/', repo: 'gunnison-flower-atlas', glyph: '140 flowers, 340 connections'
+    },
+    {
       id: 'covid', title: 'COVID Trials AI', featured: true, status: 'live', img: 'covid.jpg', cats: ['ai', 'apps'],
       blurb: 'Ask a question about COVID-19 and get an answer drawn from 10,269 ClinicalTrials.gov records and 1,630 open-access papers, with every claim linked to its source. Claude searches the trials (vector and keyword search with a medical reranker), reads posted results, and runs statistics such as pooled risk ratios in a code sandbox. A 20-question eval compared three Claude models and caught two real bugs before launch; spend caps, rate limits and a bot check keep the public demo cheap to run.',
       stack: ['Python', 'Claude API', 'RAG', 'Tool use', 'Evals', 'LanceDB', 'FastAPI', 'Hugging Face'],
@@ -147,7 +153,7 @@
 
   // Card order in every tab (a project shows in each tab listed in its cats).
   // Apps in daily office use come first, then the rest.
-  const ORDER = ['photo', 'assessor-map', 'land', 'str', 'covid', 'eye', 'fieldguide', 'bluemesa', 'ownership',
+  const ORDER = ['photo', 'assessor-map', 'land', 'str', 'covid', 'eye', 'fieldguide', 'flowers', 'bluemesa', 'ownership',
                  'audit', 'llm', 'gitguide', 'assessoryear', 'tax', 'permit', 'airport', 'building', 'housing',
                  'condition', 'traffic'];
   const BY_ID = Object.fromEntries(PROJECTS.map((p) => [p.id, p]));
